@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
     
 <hibernate-mapping>
-	<class name="com.louiema1n.crm.coursetype.damain.CrmCourseType" table="crm_course_type">
+	<class name="com.louiema1n.crm.coursetype.domain.CrmCourseType" table="crm_course_type">
 		<id name="courseTypeId">
 			<generator class="uuid"></generator>
 		</id>
@@ -21,7 +21,7 @@
 		<!-- [一个课程类型] 包含 [多个课程] -->
 		<set name="crmClasses">
 			<key column="courseTypeId"></key>
-			<one-to-many class="com.louiema1n.crm.classes.damain.CrmClasses"/>
+			<one-to-many class="com.louiema1n.crm.classes.domain.CrmClasses"/>
 		</set>
 		
 	</class>

@@ -1,8 +1,8 @@
-package com.louiema1n.crm.classes.damain;
+package com.louiema1n.crm.classes.domain;
 
 import java.util.Date;
 
-import com.louiema1n.crm.coursetype.damain.CrmCourseType;
+import com.louiema1n.crm.coursetype.domain.CrmCourseType;
 
 public class CrmClasses {
 	/**

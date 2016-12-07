@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
     
 <hibernate-mapping>
-	<class name="com.louiema1n.crm.staff.CrmStaff" table="crm_staff">
+	<class name="com.louiema1n.crm.staff.domain.CrmStaff" table="crm_staff">
 		<id name="staffId">
 			<generator class="uuid"></generator>
 		</id>

@@ -1,9 +1,9 @@
-package com.louiema1n.crm.coursetype.damain;
+package com.louiema1n.crm.coursetype.domain;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import com.louiema1n.crm.classes.damain.CrmClasses;
+import com.louiema1n.crm.classes.domain.CrmClasses;
 
 public class CrmCourseType {
 	/**
