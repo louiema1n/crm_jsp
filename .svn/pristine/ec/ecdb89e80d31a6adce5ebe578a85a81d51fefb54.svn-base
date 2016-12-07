@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+<hibernate-mapping>
+	<class name="com.louiema1n.crm.coursetype.damain.CrmCourseType" table="crm_course_type">
+		<id name="courseTypeId">
+			<generator class="uuid"></generator>
+		</id>
+		
+		<property name="courseCost">
+			<column name="courseCost" sql-type="double"></column>
+		</property>
+		<property name="total">
+			<column name="total" sql-type="int"></column>
+		</property>
+		<property name="courseName"></property>
+		<property name="remark"></property>
+		
+		<!-- [一个课程类型] 包含 [多个课程] -->
+		<set name="crmClasses">
+			<key column="courseTypeId"></key>
+			<one-to-many class="com.louiema1n.crm.classes.damain.CrmClasses"/>
+		</set>
+		
+	</class>
+</hibernate-mapping>
