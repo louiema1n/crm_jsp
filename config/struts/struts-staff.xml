@@ -6,7 +6,12 @@
 <struts>
 	<!-- staff配置 -->
 	<package name="staff" namespace="/" extends="common">
-		
+		<action name="staffAction_*" class="com.louiema1n.crm.staff.web.action.StaffAction" method="{1}">
+			<!-- 登陆成功,跳转至首页Action -->
+			<result name="success" type="redirectAction">staffAction_home</result>
+			<!-- 首页 -->
+			<result name="home">/WEB-INF/pages/frame.jsp</result>
+		</action>
 	</package>
 	
 </struts>

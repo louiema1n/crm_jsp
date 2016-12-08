@@ -33,7 +33,7 @@
 				<prop key="hibernate.format_sql">true</prop>
 			</props>
 		</property>
-		<property name="mappingLocations" value="classpath:com/louiema1n/crm/*/damain/*.hbm.xml"></property>
+		<property name="mappingLocations" value="classpath:com/louiema1n/crm/*/domain/*.hbm.xml"></property>
 	</bean>
 	
 	

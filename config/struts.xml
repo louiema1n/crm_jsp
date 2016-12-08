@@ -14,8 +14,41 @@
 	
 	<!-- 2.公共配置 -->
 	<package name="common" namespace="/" extends="struts-default">
+	
+		<!-- login拦截器配置(覆盖默认拦截器栈) -->
+		<interceptors>
+			<!-- 注册拦截器(单独使用会取消默认拦截器栈defaultStack) -->
+			<interceptor name="loginInterceptor" class="com.louiema1n.crm.web.interceptor.LoginInterceptor"></interceptor>
+			<!-- 配置自定义拦截器栈 -->
+			<interceptor-stack name="loginStack">
+				<!-- 自定义拦截器需要排除login方法 (多个方法 )-->
+				<!-- excludeMethods不包含;includeMethods包含方法 -->
+				<interceptor-ref name="loginInterceptor">
+					<param name="excludeMethods">login</param>
+				</interceptor-ref>
+				
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<!-- 声明默认 -->
+		<default-interceptor-ref name="loginStack"></default-interceptor-ref>
 		
+		<!-- 全局结果集 -->
+		<global-results>
+			<result name="login">/WEB-INF/pages/login.jsp</result>
+		</global-results>
+		
+		<!-- 配置公共jsp访问action
+			1)任何action都继承ActionSupport,那么class引用默认为ActionSupport,可省略不写
+			2)method默认为execute,默认时可以不写
+			3)result.name返回值默认为success,默认时可以不写
+		 -->
+		<action name="uiAction_*_*" >
+			<result>/WEB-INF/pages/{1}/{2}.jsp</result>
+		</action>
 	</package>
+	
+	
 	
 	
 	<!-- 3.导入其他Struts配置文件 -->

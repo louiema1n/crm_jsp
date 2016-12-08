@@ -16,7 +16,6 @@ public class CrmPost {
 	
 	private String postId;
 	private String postName;
-	private String depId;
 	
 	//[多个职务] 属于 [一个部门]
 	private CrmDepartment crmDepartment;
@@ -38,14 +37,6 @@ public class CrmPost {
 
 	public void setPostName(String postName) {
 		this.postName = postName;
-	}
-
-	public String getDepId() {
-		return depId;
-	}
-
-	public void setDepId(String depId) {
-		this.depId = depId;
 	}
 
 	public CrmDepartment getCrmDepartment() {

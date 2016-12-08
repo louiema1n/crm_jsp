@@ -10,20 +10,15 @@
 		</id>
 		
 		<property name="loginName"></property>
-		<property name="total"></property>
 		<property name="loginPwd"></property>
 		<property name="staffName"></property>
 		<property name="gender"></property>
 		<property name="onDutyDate">
 			<column name="onDutyDate" sql-type="datetime"></column>
 		</property>
-		<property name="postId"></property>
 		
 		<!-- [多个员工] 属于 [一个职务] -->
-		<set name="crmPost">
-			<key column="postId"></key>
-			<one-to-many class="com.louiema1n.crm.post.domain.CrmPost"/>
-		</set>
+		<many-to-one name="crmPost" class="com.louiema1n.crm.post.domain.CrmPost" column="postId"></many-to-one>
 		
 	</class>
 </hibernate-mapping>

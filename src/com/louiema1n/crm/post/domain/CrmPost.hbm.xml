@@ -10,7 +10,6 @@
 		</id>
 		
 		<property name="postName"></property>
-		<property name="depId"></property>
 		
 		<!-- [多个职务] 属于 [一个部门] -->
 		<many-to-one name="crmDepartment" class="com.louiema1n.crm.department.domain.CrmDepartment" column="depId"></many-to-one>

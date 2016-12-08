@@ -9,8 +9,6 @@
 			<generator class="uuid"></generator>
 		</id>
 		
-		<property name="courseTypeId"></property>
-		<property name="courseTypeId"></property>
 		<property name="name"></property>
 		<property name="beginTime">
 			<column name="beginTime" sql-type="datetime"></column>

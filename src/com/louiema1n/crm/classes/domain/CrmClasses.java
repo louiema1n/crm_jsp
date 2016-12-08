@@ -23,7 +23,6 @@ public class CrmClasses {
 		  CONSTRAINT FOREIGN KEY (`courseTypeId`) REFERENCES `crm_course_type` (`courseTypeId`)
 	 */
 	private String classId;
-	private String courseTypeId;
 	private String name;
 	private Date beginTime;
 	private Date endTime;
@@ -46,14 +45,6 @@ public class CrmClasses {
 
 	public void setClassId(String classId) {
 		this.classId = classId;
-	}
-
-	public String getCourseTypeId() {
-		return courseTypeId;
-	}
-
-	public void setCourseTypeId(String courseTypeId) {
-		this.courseTypeId = courseTypeId;
 	}
 
 	public String getName() {
