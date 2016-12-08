@@ -11,6 +11,13 @@
 			<result name="success" type="redirectAction">staffAction_home</result>
 			<!-- 首页 -->
 			<result name="home">/WEB-INF/pages/frame.jsp</result>
+			
+			<!-- 查询到所有并展示 -->
+			<result name="findStaffAll">/WEB-INF/pages/staff/listStaff.jsp</result>
+			
+			<!-- 显示编辑界面 -->
+			<result name="editUI">/WEB-INF/pages/staff/editStaff.jsp</result>
+			
 		</action>
 	</package>
 	

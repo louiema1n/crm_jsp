@@ -1,5 +1,7 @@
 package com.louiema1n.crm.staff.web.action;
 
+import java.util.List;
+
 import com.louiema1n.crm.staff.domain.CrmStaff;
 import com.louiema1n.crm.staff.service.StaffService;
 import com.opensymphony.xwork2.ActionContext;
@@ -48,7 +50,28 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff> 
 	/**
 	 * 登陆成功
 	 */
-	public String home(){
+	public String home() {
 		return "home";
+	}
+	
+	public String findAllStaff() {
+		List<CrmStaff> allStaff = staffService.findAll();
+		//将所有员工信息放入值栈中
+		ActionContext.getContext().getValueStack().set("allStaff", allStaff);
+		//返回信息
+		return "findStaffAll";
+	}
+	
+	
+	/**
+	 * 编辑界面回显数据
+	 * @return
+	 */
+	public String editUI() {
+		//调用service根据id查询员工信息
+		CrmStaff staff = staffService.findById(crmStaff.getStaffId());
+		//将staff压入值栈
+		ActionContext.getContext().getValueStack().push(staff);
+		return "editUI";
 	}
 }

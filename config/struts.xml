@@ -30,8 +30,8 @@
 				<interceptor-ref name="defaultStack"></interceptor-ref>
 			</interceptor-stack>
 		</interceptors>
-		<!-- 声明默认 -->
-		<default-interceptor-ref name="loginStack"></default-interceptor-ref>
+		<!-- 声明默认 
+		<default-interceptor-ref name="loginStack"></default-interceptor-ref>-->
 		
 		<!-- 全局结果集 -->
 		<global-results>
