@@ -23,7 +23,7 @@
    
     <td width="52%"align="right">
     	<!-- 提交表单 -->
-       <a href="javascript:void(0)" onclick="document.forms[0].submit()">
+       <a href="javascript:void(0)" onclick="document.forms[0].submit();">
        	<img src="${pageContext.request.contextPath}/images/button/save.gif" />
        </a>
        <!-- 执行js，进行返回 -->
@@ -35,7 +35,7 @@
 </table>
 
 	<s:form action="staffAction_edit">
-	<s:hidden name="staffId" value="%{staffId}"></s:hidden>
+	<s:hidden name="staffId" value="%{staffId}" ></s:hidden>
 	<table width="88%" border="0" class="emp_table" style="width:80%;">
 	 <tr>
 	    <td>登录名：</td>
@@ -129,7 +129,6 @@
 		
 		//4.发送请求
 		xmlhttp.send(null);
-		
 	}
 </script>
 

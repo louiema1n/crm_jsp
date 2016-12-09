@@ -28,9 +28,9 @@
 			<img src="${pageContext.request.contextPath}/images/button/gaojichaxun.gif" />
 		</a>      
     	<%--编辑前：添加类别 --%>
-    	<a href="${pageContext.request.contextPath}/pages/coursetype/addOrEditCourse.jsp">
-	       	<img src="${pageContext.request.contextPath}/images/button/tianjia.gif" />
-    	</a>
+    	<s:a namespace="/" action="courseTypeAction_addOrEditUI">
+	  		<img src="${pageContext.request.contextPath}/images/button/tianjia.gif" />
+	  	</s:a>
     </td>
     <td width="3%" align="right"><img src="${pageContext.request.contextPath}/images/tright.gif"/></td>
   </tr>
@@ -38,27 +38,30 @@
 
 
 <%--条件查询 start --%>
-
-<form action="${pageContext.request.contextPath}/coursetype/courseTypeAction_findAll.action" method="post">
+<s:form namespace="/" action="courseTypeAction_findAll">
 	<table width="88%" border="0" class="emp_table" style="width:80%;">
 	  <tr>
 	    <td width="10%">课程类别：</td>
-	    <td><input type="text" name="courseName" size="30" value="" /></td>
+	    <td><s:textfield name="courseName" size="30"></s:textfield></td>
 	  </tr>
 	  <tr>
 	    <td >课程简介：</td>
-	    <td > <input type="text" name="remark" size="30" value="" /></td>
+	    <td ><s:textfield name="remark" size="30"></s:textfield></td>
 	  </tr>
 	  <tr>  
 	    <td >总学时：</td>
-	    <td ><input type="text" name="totalStart" size="12" value="" />  至  <input type="text" name="totalEnd" size="12" value="" /></td>
+	    <td ><s:textfield name="totalStart" size="12"></s:textfield>
+	    	至  
+	    	<s:textfield name="totalEnd" size="12"></s:textfield></td>
 	  </tr>
 	  <tr>
 	    <td>课程费用：</td>
-	    <td ><input type="text" name="lessonCostStart" size="12" value="" /> 至 <input type="text" name="lessonCostEnd" size="12" value="" /></td>
+	    <td ><s:textfield name="courseCostStart" size="12"></s:textfield>
+	    	至 
+	    	<s:textfield name="courseCostEnd" size="12"></s:textfield></td>
 	  </tr>
 	</table>
-</form>
+</s:form>
 
 <%--条件查询 end --%>
 
@@ -84,8 +87,10 @@
 	    <td align="center"><s:property value="#allCourseType.total"/></td>
 	    <td align="center"><s:property value="#allCourseType.courseCost"/></td>
 	  	<td width="11%" align="center">
-	  		
-	  		<a href="${pageContext.request.contextPath}/pages/coursetype/addOrEditCourse.jsp"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" /></a>
+	  		<s:a namespace="/" action="courseTypeAction_addOrEditUI">
+	  			<s:param name="courseTypeId" value="courseTypeId"></s:param>
+	  			<img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" />
+	  		</s:a>
 	  	</td>
 	  </tr>
   </s:iterator>

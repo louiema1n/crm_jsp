@@ -11,5 +11,25 @@ public interface CourseTypeService {
 	 * @return
 	 */
 	public List<CrmCourseType> findAllCourseType();
+
+	/**
+	 * 高级查询
+	 * @param crmCourseType
+	 * @return
+	 */
+	public List<CrmCourseType> findAllCourseType(CrmCourseType crmCourseType);
+
+	/**
+	 * 根据id查询课程信息
+	 * @param courseTypeId
+	 * @return
+	 */
+	public CrmCourseType findById(String courseTypeId);
+
+	/**
+	 * 编辑或添加操作
+	 * @param crmCourseType
+	 */
+	public void addOrEdit(CrmCourseType crmCourseType);
 	
 }

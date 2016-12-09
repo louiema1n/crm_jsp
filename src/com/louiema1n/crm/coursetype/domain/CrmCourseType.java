@@ -21,6 +21,47 @@ public class CrmCourseType {
 	
 	//[一个课程类型] 包含 [多个课程]
 	private Set<CrmClasses> crmClasses = new HashSet<CrmClasses>();
+	
+	//由于多条件查询时,总学时  课程费用两个字段是区间值,需增加相应字段存值
+	private String totalStart;
+	private String totalEnd;
+
+	private String courseCostStart;
+	private String courseCostEnd;
+	
+	
+
+	public String getTotalStart() {
+		return totalStart;
+	}
+
+	public void setTotalStart(String totalStart) {
+		this.totalStart = totalStart;
+	}
+
+	public String getTotalEnd() {
+		return totalEnd;
+	}
+
+	public void setTotalEnd(String totalEnd) {
+		this.totalEnd = totalEnd;
+	}
+
+	public String getCourseCostStart() {
+		return courseCostStart;
+	}
+
+	public void setCourseCostStart(String courseCostStart) {
+		this.courseCostStart = courseCostStart;
+	}
+
+	public String getCourseCostEnd() {
+		return courseCostEnd;
+	}
+
+	public void setCourseCostEnd(String courseCostEnd) {
+		this.courseCostEnd = courseCostEnd;
+	}
 
 	public String getCourseTypeId() {
 		return courseTypeId;

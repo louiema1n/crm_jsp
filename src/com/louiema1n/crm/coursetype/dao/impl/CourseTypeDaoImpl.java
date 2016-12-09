@@ -15,4 +15,25 @@ public class CourseTypeDaoImpl extends HibernateDaoSupport implements CourseType
 		return this.getHibernateTemplate().find("from CrmCourseType");
 	}
 
+	@Override
+	public List<CrmCourseType> findAllCourseTypes(String hql,
+			Object[] params) {
+		return this.getHibernateTemplate().find("from CrmCourseType where 1 = 1 "+hql, params);
+	}
+
+	@Override
+	public CrmCourseType findById(String courseTypeId) {
+		return this.getHibernateTemplate().get(CrmCourseType.class, courseTypeId);
+	}
+
+	/**
+	 * saveOrUpdate方法:
+	 * 有OID执行update;
+	 * 没有OID执行insert
+	 */
+	@Override
+	public void saveOrUpdate(CrmCourseType crmCourseType) {
+		this.getHibernateTemplate().saveOrUpdate(crmCourseType);
+	}
+
 }
