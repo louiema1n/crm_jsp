@@ -62,5 +62,8 @@
 	
 	<!-- 导入其他配置  -->
 	<import resource="applicationContext-staff.xml"/>
+	<import resource="applicationContext-department.xml"/>
+	<import resource="applicationContext-post.xml"/>
+	<import resource="applicationContext-courseType.xml"/>
 	
 </beans>

@@ -34,11 +34,8 @@
   </tr>
 </table>
 
-<!-- 原表单 <form action="/crm2/staff/staffAction_edit.action" method="post">
-	<input type="hidden" name="staffId" value="2c9091c14c78e58b014c78e7ecd90007"/>
--->
-	<s:form>
-	
+	<s:form action="staffAction_edit">
+	<s:hidden name="staffId" value="%{staffId}"></s:hidden>
 	<table width="88%" border="0" class="emp_table" style="width:80%;">
 	 <tr>
 	    <td>登录名：</td>
@@ -57,20 +54,19 @@
 	 <tr>
 	    <td width="10%">所属部门：</td>
 	    <td width="20%">
-	    	<select name="crmPost.crmDepartment.depId"  onchange="changePost(this)">
-			    <option value="">----请--选--择----</option>
-			    <option value="2c9091c14c78e58b014c78e67de10001" selected="selected">java学院</option>
-			    <option value="2c9091c14c78e58b014c78e68ded0002">咨询部</option>
-			</select>
+			<s:select list="allDepartment" name="crmPost.crmDepartment.depId" onchange="showPost(this)"
+				listKey="depId" listValue="depName"
+				headerKey="" headerValue="----请--选--择----"
+			></s:select>
 
 	    </td>
 	    <td width="8%">职务：</td>
 	    <td width="62%">
-	    	<select name="crmPost.postId" id="postSelectId">
-			    <option value="">----请--选--择----</option>
-			    <option value="2c9091c14c78e58b014c78e6b34a0003">总监</option>
-			    <option value="2c9091c14c78e58b014c78e6d4510004" selected="selected">讲师</option>
-			</select>
+			<%--当前员工所属职务.该职务所属部门.该部门下所有职务 --%>
+			<s:select list="crmPost != null ? crmPost.crmDepartment.crmPosts : {}" name="crmPost.postId" id="selectPostId"
+				listKey="postId" listValue="postName"
+				headerKey="" headerValue="----请--选--择----"
+			></s:select>
 	    </td>
 	  </tr>
 	  <tr>
@@ -84,6 +80,58 @@
 	  </tr>
 	</table>
 </s:form>
+
+<script type="text/javascript">
+	//改变department时自动更新post
+	function showPost(obj) {
+		//获取当前选中的depId
+		var depId = obj.value;
+		
+		//使用 ajax 通过depId查询post并回显
+		//1.获得ajax引擎
+		var xmlhttp;
+		if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+		  	xmlhttp=new XMLHttpRequest();
+		  }
+		else{// code for IE6, IE5
+		 	 xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		 
+		//2.设置回调函数
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+				//1.数据响应并回传成功,接受数据
+				var textData = xmlhttp.responseText;
+				
+				//2.将字符串封装成json对象(eval()函数将json文本转换为js对象)
+				var jsonData = eval("("+textData+")");
+				
+				//4.获得职务对象
+				var selectPostId = document.getElementById("selectPostId"); 
+				selectPostId.innerHTML = "<option value=''>----请--选--择----</option>";
+				
+				//3.遍历数据添加到职务是option中
+				for ( var i = 0; i < jsonData.length; i++) {
+					var postObj = jsonData[i];
+					//获得postId
+					var postId = postObj.postId;
+					//获得postName
+					var postName = postObj.postName;
+					//将数据填充给selectPostId
+					selectPostId.innerHTML += "<option value="+"'"+postId+"'>"+postName+"</option>";
+				}
+				
+			}
+		};
+		
+		//3.创建连接
+		xmlhttp.open("GET", "${pageContext.request.contextPath}/postAction_findByDepartment?crmDepartment.depId="+depId);
+		
+		//4.发送请求
+		xmlhttp.send(null);
+		
+	}
+</script>
 
 </body>
 </html>

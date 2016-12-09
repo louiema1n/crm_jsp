@@ -53,5 +53,7 @@
 	
 	<!-- 3.导入其他Struts配置文件 -->
 	<include file="struts/struts-staff.xml"></include>
+	<include file="struts/struts-post.xml"></include>
+	<include file="struts/struts-courseType.xml"></include>
 	
 </struts>

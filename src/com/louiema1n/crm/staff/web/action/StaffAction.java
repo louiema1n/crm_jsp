@@ -2,6 +2,8 @@ package com.louiema1n.crm.staff.web.action;
 
 import java.util.List;
 
+import com.louiema1n.crm.department.domain.CrmDepartment;
+import com.louiema1n.crm.department.service.DepartmentService;
 import com.louiema1n.crm.staff.domain.CrmStaff;
 import com.louiema1n.crm.staff.service.StaffService;
 import com.opensymphony.xwork2.ActionContext;
@@ -22,6 +24,12 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff> 
 	private StaffService staffService;
 	public void setStaffService(StaffService staffService) {
 		this.staffService = staffService;
+	}
+	
+	//自动注入DepartmentService
+	private DepartmentService departmentService;
+	public void setDepartmentService(DepartmentService departmentService) {
+		this.departmentService = departmentService;
 	}
 	
 	
@@ -59,7 +67,7 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff> 
 		//将所有员工信息放入值栈中
 		ActionContext.getContext().getValueStack().set("allStaff", allStaff);
 		//返回信息
-		return "findStaffAll";
+		return "findAllStaff";
 	}
 	
 	
@@ -72,6 +80,22 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff> 
 		CrmStaff staff = staffService.findById(crmStaff.getStaffId());
 		//将staff压入值栈
 		ActionContext.getContext().getValueStack().push(staff);
+		
+		//调用DepartmentService查询所有部门
+		List<CrmDepartment> allDepartment = departmentService.findAll();
+		//将allDepartment放入valueStack
+		ActionContext.getContext().getValueStack().set("allDepartment", allDepartment);
+		
 		return "editUI";
 	}
+	
+	/**
+	 * 编辑完成后保存
+	 * @return
+	 */
+	public String edit() {
+		this.staffService.updateStaff(crmStaff);
+		return "edit";
+	}
+	
 }

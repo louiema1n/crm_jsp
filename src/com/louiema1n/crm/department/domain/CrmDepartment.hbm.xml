@@ -5,7 +5,7 @@
     
 <hibernate-mapping>
 	<class name="com.louiema1n.crm.department.domain.CrmDepartment" table="crm_department">
-		<id name="depid">
+		<id name="depId">
 			<generator class="uuid"></generator>
 		</id>
 		
@@ -13,7 +13,7 @@
 		
 		<!-- [一个部门] 包含 [多个职务] -->
 		<set name="crmPosts">
-			<key column="depid"></key>
+			<key column="depId"></key>
 			<one-to-many class="com.louiema1n.crm.post.domain.CrmPost"/>
 		</set>
 		

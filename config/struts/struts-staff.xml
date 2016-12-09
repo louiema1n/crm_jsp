@@ -13,10 +13,16 @@
 			<result name="home">/WEB-INF/pages/frame.jsp</result>
 			
 			<!-- 查询到所有并展示 -->
-			<result name="findStaffAll">/WEB-INF/pages/staff/listStaff.jsp</result>
+			<result name="findAllStaff">/WEB-INF/pages/staff/listStaff.jsp</result>
 			
 			<!-- 显示编辑界面 -->
 			<result name="editUI">/WEB-INF/pages/staff/editStaff.jsp</result>
+			
+			<!-- 编辑完成后保存 -->
+			<result name="edit" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">staffAction_findAllStaff</param>
+			</result>
 			
 		</action>
 	</package>

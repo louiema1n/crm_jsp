@@ -11,18 +11,18 @@ public class CrmDepartment {
   	   `depName` VARCHAR(50) DEFAULT NULL
 	 */
 	
-	private String depid;
+	private String depId;
 	private String depName;
 	
 	//[一个部门] 包含 [多个职务]
 	private Set<CrmPost> crmPosts = new HashSet<CrmPost>();
 
-	public String getDepid() {
-		return depid;
+	public String getDepId() {
+		return depId;
 	}
 
-	public void setDepid(String depid) {
-		this.depid = depid;
+	public void setDepId(String depId) {
+		this.depId = depId;
 	}
 
 	public String getDepName() {
