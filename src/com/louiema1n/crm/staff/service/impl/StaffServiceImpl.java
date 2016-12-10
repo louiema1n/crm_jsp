@@ -17,7 +17,7 @@ public class StaffServiceImpl implements StaffService {
 	@Override
 	public CrmStaff login(CrmStaff crmStaff) {
 		//将密码进行MD5加密
-		String md5LoginPwd = new MyStringUtils().getMD5(crmStaff.getLoginPwd());
+		String md5LoginPwd = MyStringUtils.getMD5(crmStaff.getLoginPwd());
 		return staffDao.find(crmStaff.getLoginName(), md5LoginPwd);
 	}
 

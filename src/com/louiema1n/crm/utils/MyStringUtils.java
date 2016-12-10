@@ -3,6 +3,7 @@ package com.louiema1n.crm.utils;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.UUID;
 
 public class MyStringUtils {
 	
@@ -11,7 +12,7 @@ public class MyStringUtils {
 	 * @param value 明文
 	 * @return	密文
 	 */
-	public String getMD5(String value) {
+	public static String getMD5(String value) {
 		try {
 			//1.获得jdk提供消息摘要算法工具类
 			MessageDigest messageDigest = MessageDigest.getInstance("MD5");
@@ -24,6 +25,13 @@ public class MyStringUtils {
 		} catch (NoSuchAlgorithmException e) {
 			throw new RuntimeException(e);
 		}
+	}
+	
+	/**
+	 * 获取32位UUID的字符串
+	 */
+	public static String getUUID() {
+		return UUID.randomUUID().toString().replace("-", "");
 	}
 	
 }

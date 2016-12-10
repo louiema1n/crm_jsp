@@ -3,6 +3,7 @@ package com.louiema1n.crm.base;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
+import com.louiema1n.crm.classes.service.ClassesService;
 import com.louiema1n.crm.coursetype.service.CourseTypeService;
 import com.louiema1n.crm.department.service.DepartmentService;
 import com.louiema1n.crm.department.service.impl.DepartmentServiceImpl;
@@ -72,6 +73,13 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T> {
 	}
 	
 	//∞‡º∂
+	private ClassesService classesService;
+	public ClassesService getClassesService() {
+		return classesService;
+	}
+	public void setClassesService(ClassesService classesService) {
+		this.classesService = classesService;
+	}
 
 	//------------------------
 	//∑÷“≥

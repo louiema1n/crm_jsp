@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- staff配置 -->
+	<package name="classes" namespace="/" extends="common">
+		<action name="classesAction_*" class="com.louiema1n.crm.classes.web.action.ClassesAction" method="{1}">
+			 <!-- 查询所有 -->
+			 <result name="findAll">/WEB-INF/pages/classesm/listClass.jsp</result>
+			 <!-- 显示上传jsp -->
+			 <result name="uploadUI">/WEB-INF/pages/classesm/uploadClass.jsp</result>
+			 <!-- 上传成功 -->
+			 <result name="upload" type="redirectAction">classesAction_findAll</result>
+			 <!-- 上传限定文件拓展名外的文件 -->
+			 <result name="uploadInput">/WEB-INF/pages/error.jsp</result>
+		</action>
+	</package>
+	
+</struts>

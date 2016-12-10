@@ -65,5 +65,6 @@
 	<import resource="applicationContext-department.xml"/>
 	<import resource="applicationContext-post.xml"/>
 	<import resource="applicationContext-courseType.xml"/>
+	<import resource="applicationContext-classes.xml"/>
 	
 </beans>

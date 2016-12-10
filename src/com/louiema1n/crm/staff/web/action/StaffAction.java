@@ -24,7 +24,7 @@ public class StaffAction extends BaseAction<CrmStaff> {
 		if (staff != null) {
 			//登录成功
 			//将数据放入session作用域中
-			this.put("loginStaff", staff);
+			this.putSession("loginStaff", staff);
 			//重定向至主页
 			return "success";
 		}

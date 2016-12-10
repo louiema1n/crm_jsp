@@ -21,17 +21,22 @@
 			<interceptor name="loginInterceptor" class="com.louiema1n.crm.web.interceptor.LoginInterceptor"></interceptor>
 			<!-- 配置自定义拦截器栈 -->
 			<interceptor-stack name="loginStack">
+			
+				<interceptor-ref name="defaultStack">
+					<!-- 自定义默认拦截器参数 -->
+					<param name="fileUpload.allowedExtensions">.xls,.xlsx</param>
+				</interceptor-ref>
+				
 				<!-- 自定义拦截器需要排除login方法 (多个方法 )-->
 				<!-- excludeMethods不包含;includeMethods包含方法 -->
 				<interceptor-ref name="loginInterceptor">
 					<param name="excludeMethods">login</param>
 				</interceptor-ref>
 				
-				<interceptor-ref name="defaultStack"></interceptor-ref>
 			</interceptor-stack>
 		</interceptors>
-		<!-- 声明默认 
-		<default-interceptor-ref name="loginStack"></default-interceptor-ref>-->
+		<!-- 声明默认 -->
+		<default-interceptor-ref name="loginStack"></default-interceptor-ref>
 		
 		<!-- 全局结果集 -->
 		<global-results>
@@ -55,5 +60,6 @@
 	<include file="struts/struts-staff.xml"></include>
 	<include file="struts/struts-post.xml"></include>
 	<include file="struts/struts-courseType.xml"></include>
+	<include file="struts/struts-classes.xml"></include>
 	
 </struts>
