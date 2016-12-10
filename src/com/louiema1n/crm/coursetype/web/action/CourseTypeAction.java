@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.louiema1n.crm.base.BaseAction;
 import com.louiema1n.crm.coursetype.domain.CrmCourseType;
 import com.louiema1n.crm.coursetype.service.CourseTypeService;
 import com.louiema1n.crm.page.PageBean;
@@ -11,34 +12,8 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
-public class CourseTypeAction extends ActionSupport implements
-		ModelDriven<CrmCourseType> {
+public class CourseTypeAction extends BaseAction<CrmCourseType> {
 
-	//封装数据
-	CrmCourseType crmCourseType = new CrmCourseType();
-	
-	@Override
-	public CrmCourseType getModel() {
-		return crmCourseType;
-	}
-	
-	//spring自动注入
-	private CourseTypeService courseTypeService;
-	public void setCourseTypeService(CourseTypeService courseTypeService) {
-		this.courseTypeService = courseTypeService;
-	}
-
-	//分页数据
-	private int pageNum = 1;
-	public void setPageNum(int pageNum) {
-		this.pageNum = pageNum;
-	}
-	
-	private int pageSiaze = 2;	//固定值
-	public void setPageSiaze(int pageSiaze) {
-		this.pageSiaze = pageSiaze;
-	}
-	
 	public String findAll() {
 		/**
 		 * 普通查询
@@ -51,10 +26,10 @@ public class CourseTypeAction extends ActionSupport implements
 		/**
 		 * 高级查询 + 条件
 		 */
-		PageBean<CrmCourseType> pageBean = this.courseTypeService.findAllCourseType(crmCourseType, pageNum, pageSiaze);
+		PageBean<CrmCourseType> pageBean = this.getCourseTypeService().findAllCourseType(this.getModel(), this.getPageNum(), this.getPageSiaze());
 		
 		//将数据放入context中,jsp需要用#获取
-		ActionContext.getContext().put("pageBean", pageBean);
+		this.put("pageBean", pageBean);
 		
 		return "findAll";
 	}
@@ -65,11 +40,11 @@ public class CourseTypeAction extends ActionSupport implements
 	 * @return
 	 */
 	public String addOrEditUI() {
-		if (StringUtils.isNotBlank(crmCourseType.getCourseTypeId())) {
+		if (StringUtils.isNotBlank(this.getModel().getCourseTypeId())) {
 			//调用service查询出CrmCourseType
-			CrmCourseType findCourse = this.courseTypeService.findById(crmCourseType.getCourseTypeId());
+			CrmCourseType findCourse = this.getCourseTypeService().findById(this.getModel().getCourseTypeId());
 			//将查询到的信息压入valueStack
-			ActionContext.getContext().getValueStack().push(findCourse);
+			this.push(findCourse);
 		}
 		return "addOrEditUI";
 	}
@@ -80,7 +55,7 @@ public class CourseTypeAction extends ActionSupport implements
 	 * @return
 	 */
 	public String addOrEdit() {
-		this.courseTypeService.addOrEdit(crmCourseType);
+		this.getCourseTypeService().addOrEdit(this.getModel());
 		return "addOrEdit";
 	}
 	

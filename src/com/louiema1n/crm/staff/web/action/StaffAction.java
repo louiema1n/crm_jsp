@@ -2,6 +2,7 @@ package com.louiema1n.crm.staff.web.action;
 
 import java.util.List;
 
+import com.louiema1n.crm.base.BaseAction;
 import com.louiema1n.crm.department.domain.CrmDepartment;
 import com.louiema1n.crm.department.service.DepartmentService;
 import com.louiema1n.crm.staff.domain.CrmStaff;
@@ -10,41 +11,20 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
-public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff> {
+public class StaffAction extends BaseAction<CrmStaff> {
 
-	//1.自动封装数据
-	private CrmStaff crmStaff = new CrmStaff();
-
-	@Override
-	public CrmStaff getModel() {
-		return crmStaff;
-	}
-	
-	//2.自动注入StaffService
-	private StaffService staffService;
-	public void setStaffService(StaffService staffService) {
-		this.staffService = staffService;
-	}
-	
-	//自动注入DepartmentService
-	private DepartmentService departmentService;
-	public void setDepartmentService(DepartmentService departmentService) {
-		this.departmentService = departmentService;
-	}
-	
-	
 	/**
 	 * 登陆
 	 * @param crmStaff
 	 * @return
 	 */
 	public String login() {
-		CrmStaff staff = staffService.login(crmStaff);
+		CrmStaff staff = this.getStaffService().login(this.getModel());
 		//判断是否登录成功
 		if (staff != null) {
 			//登录成功
 			//将数据放入session作用域中
-			ActionContext.getContext().getSession().put("loginStaff", staff);
+			this.put("loginStaff", staff);
 			//重定向至主页
 			return "success";
 		}
@@ -63,9 +43,9 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff> 
 	}
 	
 	public String findAllStaff() {
-		List<CrmStaff> allStaff = staffService.findAll();
+		List<CrmStaff> allStaff = this.getStaffService().findAll();
 		//将所有员工信息放入值栈中
-		ActionContext.getContext().getValueStack().set("allStaff", allStaff);
+		this.set("allStaff", allStaff);
 		//返回信息
 		return "findAllStaff";
 	}
@@ -77,14 +57,14 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff> 
 	 */
 	public String editUI() {
 		//调用service根据id查询员工信息
-		CrmStaff staff = staffService.findById(crmStaff.getStaffId());
+		CrmStaff staff = this.getStaffService().findById(this.getModel().getStaffId());
 		//将staff压入值栈
 		ActionContext.getContext().getValueStack().push(staff);
 		
 		//调用DepartmentService查询所有部门
-		List<CrmDepartment> allDepartment = departmentService.findAll();
+		List<CrmDepartment> allDepartment = this.getDepartmentService().findAll();
 		//将allDepartment放入valueStack
-		ActionContext.getContext().getValueStack().set("allDepartment", allDepartment);
+		this.set("allDepartment", allDepartment);
 		
 		return "editUI";
 	}
@@ -94,7 +74,7 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff> 
 	 * @return
 	 */
 	public String edit() {
-		this.staffService.updateStaff(crmStaff);
+		this.getStaffService().updateStaff(this.getModel());
 		return "edit";
 	}
 	

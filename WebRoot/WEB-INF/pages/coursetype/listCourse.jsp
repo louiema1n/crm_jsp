@@ -39,6 +39,8 @@
 
 <%--条件查询 start --%>
 <s:form namespace="/" action="courseTypeAction_findAll">
+  <!-- 隐藏域,存放当前页码 -->
+  <s:hidden name="pageNum" value="1" id="pageNum"></s:hidden>
 	<table width="88%" border="0" class="emp_table" style="width:80%;">
 	  <tr>
 	    <td width="10%">课程类别：</td>
@@ -101,13 +103,33 @@
     <td align="right">
     	<span>第<s:property value="#pageBean.pageNum"/>/<s:property value="#pageBean.totalPage"/>页</span>
         <span>
-        	<a href="#">[首页]</a>&nbsp;&nbsp;
-            <a href="#">[上一页]</a>&nbsp;&nbsp;
-            <a href="#">[下一页]</a>&nbsp;&nbsp;
-            <a href="#">[尾页]</a>
+        <s:if test="#pageBean.pageNum > 1">
+        	<a href="javascript:void(0)" onclick="showPage(1)">[首页]</a>&nbsp;&nbsp;
+            <a href="javascript:void(0)" onclick="showPage(<s:property value="#pageBean.pageNum - 1"/>)">[上一页]</a>&nbsp;&nbsp;
+        </s:if>
+        
+        <!-- 循环显示页码进度条 -->
+        <s:iterator begin="#pageBean.start" end="#pageBean.end" var="num">
+            <a href="javascript:void(0)" onclick="showPage(<s:property value="#num"/>)">[<s:property value="#num"/>]</a>&nbsp;&nbsp;
+        </s:iterator>
+        
+        <s:if test="#pageBean.pageNum < #pageBean.totalPage">
+            <a href="javascript:void(0)" onclick="showPage(<s:property value="#pageBean.pageNum + 1"/>)">[下一页]</a>&nbsp;&nbsp;
+            <a href="javascript:void(0)" onclick="showPage(<s:property value="#pageBean.totalPage"/>)">[尾页]</a>
+        </s:if>
         </span>
     </td>
   </tr>
 </table>
+<%--分页 --%>
+<script type="text/javascript">
+	function showPage(pageNum) {
+		//1.将pageNum赋值给隐藏域,和表单一起提交
+		document.getElementById("pageNum").value = pageNum;
+		//2.提交表单
+		document.forms[0].submit();
+	}
+</script>
+
 </body>
 </html>

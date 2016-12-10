@@ -19,7 +19,7 @@ public class CourseTypeServiceImpl implements CourseTypeService {
 	
 	@Override
 	public List<CrmCourseType> findAllCourseType() {
-		return courseTypeDao.findAllCourseTypes();
+		return courseTypeDao.findAll();
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class CourseTypeServiceImpl implements CourseTypeService {
 		String hql = hqlBuilder.toString();
 		Object[] params = paramList.toArray();
 		
-		return courseTypeDao.findAllCourseTypes(hql, params);
+		return courseTypeDao.findAll(hql, params);
 	}
 
 	@Override
@@ -131,7 +131,7 @@ public class CourseTypeServiceImpl implements CourseTypeService {
 		//2.创建对象
 		PageBean<CrmCourseType> pageBean = new PageBean<CrmCourseType>(pageNum, pageSize, totalRecord);
 		//3.获取分页数据
-		List<CrmCourseType> data = this.courseTypeDao.findAllCourseTypes(crmCourseType, hql, params, pageBean.getStartIndex(), pageBean.getPageSize());
+		List<CrmCourseType> data = this.courseTypeDao.findAll(crmCourseType, hql, params, pageBean.getStartIndex(), pageBean.getPageSize());
 		//4.封装pageBean
 		pageBean.setPage(data);
 		return pageBean;

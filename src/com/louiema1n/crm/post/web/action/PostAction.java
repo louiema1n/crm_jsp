@@ -8,29 +8,14 @@ import org.apache.struts2.ServletActionContext;
 import net.sf.json.JSONArray;
 import net.sf.json.JsonConfig;
 
+import com.louiema1n.crm.base.BaseAction;
 import com.louiema1n.crm.post.domain.CrmPost;
 import com.louiema1n.crm.post.service.PostService;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
-public class PostAction extends ActionSupport implements ModelDriven<CrmPost> {
+public class PostAction extends BaseAction<CrmPost> {
 
-	//封装数据
-	private CrmPost crmpost = new CrmPost();
-	
-	@Override
-	public CrmPost getModel() {
-		return crmpost;
-	}
-	
-	
-	//自动注入
-	private PostService postService;
-	public void setPostService(PostService postService) {
-		this.postService = postService;
-	}
-	
-	
 	/**
 	 * 通过depId查询所有的post(JSON)
 	 * @return
@@ -38,7 +23,7 @@ public class PostAction extends ActionSupport implements ModelDriven<CrmPost> {
 	 */
 	public String findByDepartment() throws IOException {
 		//1.通过depId调用postService查询post
-		List<CrmPost> listPost = this.postService.findByDepartment(crmpost.getCrmDepartment());
+		List<CrmPost> listPost = this.getPostService().findByDepartment(this.getModel().getCrmDepartment());
 		
 		//2.将Java bean封装成json数据(list,array用JSONArray;map,Javabean用JSONObject)
 		//先排除不需要的crmDepartment.crmStaffs否则死循环

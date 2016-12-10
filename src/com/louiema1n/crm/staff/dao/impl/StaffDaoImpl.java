@@ -4,10 +4,11 @@ import java.util.List;
 
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+import com.louiema1n.crm.base.impl.BaseDaoImpl;
 import com.louiema1n.crm.staff.dao.StaffDao;
 import com.louiema1n.crm.staff.domain.CrmStaff;
 
-public class StaffDaoImpl extends HibernateDaoSupport implements StaffDao {
+public class StaffDaoImpl extends BaseDaoImpl<CrmStaff> implements StaffDao {
 
 	//ÐèÒªspring×¢Èësessionfactory
 	@Override
@@ -17,16 +18,6 @@ public class StaffDaoImpl extends HibernateDaoSupport implements StaffDao {
 			return crmList.get(0);
 		}
 		return null;
-	}
-
-	@Override
-	public List<CrmStaff> findAll() {
-		return this.getHibernateTemplate().find("from CrmStaff");
-	}
-
-	@Override
-	public CrmStaff findById(String staffId) {
-		return this.getHibernateTemplate().get(CrmStaff.class, staffId);
 	}
 
 }
