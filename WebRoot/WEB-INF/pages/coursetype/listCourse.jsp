@@ -80,7 +80,7 @@
 	<td width="11%" align="center">编辑</td>
   </tr>
   <%--数据展示，单行：tabtd1；双行：tabtd2 --%>
-  |<s:iterator value="#allCourseType" var="allCourseType">
+  |<s:iterator value="#pageBean.page" var="allCourseType">
    <tr class="tabtd1">
 	    <td align="center"><s:property value="#allCourseType.courseName"/> </td>
 	    <td align="center"><s:property value="#allCourseType.remark"/> </td>
@@ -99,7 +99,7 @@
 <table border="0" cellspacing="0" cellpadding="0" align="center">
   <tr>
     <td align="right">
-    	<span>第1/3页</span>
+    	<span>第<s:property value="#pageBean.pageNum"/>/<s:property value="#pageBean.totalPage"/>页</span>
         <span>
         	<a href="#">[首页]</a>&nbsp;&nbsp;
             <a href="#">[上一页]</a>&nbsp;&nbsp;

@@ -3,6 +3,7 @@ package com.louiema1n.crm.coursetype.service;
 import java.util.List;
 
 import com.louiema1n.crm.coursetype.domain.CrmCourseType;
+import com.louiema1n.crm.page.PageBean;
 
 public interface CourseTypeService {
 
@@ -31,5 +32,12 @@ public interface CourseTypeService {
 	 * @param crmCourseType
 	 */
 	public void addOrEdit(CrmCourseType crmCourseType);
+	
+	/**
+	 * 带分页参数的查询分页数据
+	 * @param crmCourseType
+	 * @return
+	 */
+	public PageBean<CrmCourseType> findAllCourseType(CrmCourseType crmCourseType, int pageNum, int pageSize);
 	
 }

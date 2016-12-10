@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.louiema1n.crm.coursetype.domain.CrmCourseType;
 import com.louiema1n.crm.coursetype.service.CourseTypeService;
+import com.louiema1n.crm.page.PageBean;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -26,6 +27,17 @@ public class CourseTypeAction extends ActionSupport implements
 	public void setCourseTypeService(CourseTypeService courseTypeService) {
 		this.courseTypeService = courseTypeService;
 	}
+
+	//分页数据
+	private int pageNum = 1;
+	public void setPageNum(int pageNum) {
+		this.pageNum = pageNum;
+	}
+	
+	private int pageSiaze = 2;	//固定值
+	public void setPageSiaze(int pageSiaze) {
+		this.pageSiaze = pageSiaze;
+	}
 	
 	public String findAll() {
 		/**
@@ -37,12 +49,12 @@ public class CourseTypeAction extends ActionSupport implements
 		 */
 		
 		/**
-		 * 高级查询
+		 * 高级查询 + 条件
 		 */
-		List<CrmCourseType> allCourseType = this.courseTypeService.findAllCourseType(crmCourseType);
+		PageBean<CrmCourseType> pageBean = this.courseTypeService.findAllCourseType(crmCourseType, pageNum, pageSiaze);
 		
 		//将数据放入context中,jsp需要用#获取
-		ActionContext.getContext().put("allCourseType", allCourseType);
+		ActionContext.getContext().put("pageBean", pageBean);
 		
 		return "findAll";
 	}
@@ -71,5 +83,7 @@ public class CourseTypeAction extends ActionSupport implements
 		this.courseTypeService.addOrEdit(crmCourseType);
 		return "addOrEdit";
 	}
+	
+	
 
 }
